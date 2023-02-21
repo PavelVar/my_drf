@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "user"
+version = "0.1.0"
+description = ""
+authors = ["Pavel"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11.0"
+iso4217 = "^1.11.20220401"
+python-dateutil = "^2.8.2"
+django = "^4.1.7"
+djangorestframework = "^3.14.0"
+pymysql = "^1.0.2"
+djoser = "^2.1.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+isort = "^5.10.1"
+black = "^22.10.0"
+flake8 = "^5.0.4"
+flake8-annotations = "^2.9.1"
+mypy = "^1.0"
+types-python-dateutil = "^2.8.19.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
