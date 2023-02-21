@@ -11,6 +11,7 @@ from django.db.models import (
     IntegerField,
     UUIDField,
 )
+
 from iso4217 import Currency
 
 
@@ -29,6 +30,14 @@ class DepositProducts(models.Model):
     def __str__(self: "DepositProducts") -> CharField:
         return self.name
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(currency__in=[cur.code for cur in Currency]),
+                name='valid_currency_depositProducts'
+            )
+        ]
+
 
 class Deposits(models.Model):
     user_uuid = UUIDField(default=uuid.uuid4)
@@ -40,4 +49,12 @@ class Deposits(models.Model):
     created_at = DateField(auto_now_add=True)
     ends_at = DateField(editable=False)
     updated_at = DateField(auto_now=True)
-    status = CharField(max_length=6, choices=[("A", "ACTIVE"), ("C", "CLOSED")])
+    status = CharField(max_length=6, choices=[("ACTIVE", "ACTIVE"), ("CLOSED", "CLOSED")])
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(status__in=["ACTIVE", "CLOSED"]),
+                name='valid_status_deposits'
+            )
+        ]

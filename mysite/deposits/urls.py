@@ -4,7 +4,7 @@ from deposits.views import (
     DepositsListView,
     DepositView,
 )
-from django.urls import path, include
+from django.urls import path
 
 urlpatterns = [
     path("deposit-products/", DepositProductsListView.as_view()),
