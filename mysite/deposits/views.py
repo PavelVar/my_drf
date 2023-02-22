@@ -37,7 +37,7 @@ class DepositsListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly, )
 
     def create(self: "DepositCreateView", request: Request, *args: Any, **kwargs: Any) -> Response:
-        product = DepositProducts.objects.get(pk=request.data["deposit_product_id"])
+        product = DepositProducts.objects.get(pk=request.data["deposit_product"])
 
         if Decimal(request.data["amount"]) > product.max_amount or Decimal(request.data["amount"]) < product.min_amount:
             return Response(status=status.HTTP_400_BAD_REQUEST, data="Wrong deposit amount")

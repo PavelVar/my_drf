@@ -7,7 +7,6 @@ from iso4217 import Currency
 
 from accounts.utils import generate_account_number
 
-# account_num = generate_account_number()
 
 class Accounts(models.Model):
     class AccountType(models.TextChoices):
@@ -17,7 +16,7 @@ class Accounts(models.Model):
         INTEREST = "INTEREST", _('Interest')
 
     user_uuid = UUIDField(default=uuid.uuid4)
-    account_number = CharField(max_length=25, unique=True, editable=False, default=)
+    account_number = CharField(max_length=25, unique=True, editable=False, default=generate_account_number)
     currency = CharField(max_length=5, choices=[(cur.code, cur.code) for cur in Currency])
     amount = DecimalField(max_digits=12, decimal_places=2)
     created_at = DateField(auto_now_add=True)

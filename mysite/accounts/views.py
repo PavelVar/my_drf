@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 
 from accounts.models import Accounts, Transactions
+from accounts.permissions import IsOwnerOrReadOnly
 from accounts.serializers import AccountsSerializer, TransactionsSerializer
 
 
@@ -13,4 +14,4 @@ class AccountsViewSet(viewsets.ModelViewSet):
 class TransactionsViewSet(viewsets.ModelViewSet):
     queryset = Transactions.objects.all()
     serializer_class = TransactionsSerializer
-    # permission_classes = [IsAccountAdminOrReadOnly]
+    # permission_classes = [IsOwnerOrReadOnly]
